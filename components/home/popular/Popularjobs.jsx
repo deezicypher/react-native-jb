@@ -8,7 +8,12 @@ import useFetch from '../../../hooks/useFetch'
 
 const Popularjobs = ({data,error,loading}) => {
   const router = useRouter();
-  
+  const [selectedJob, setSelectedJob] = useState();
+
+  const handleCardPress = (item) => {
+    router.push(`/job-details/${item.job_id}`);
+    setSelectedJob(item.job_id);
+  };
 
   return (
     <View style={styles.container}>
@@ -29,6 +34,8 @@ const Popularjobs = ({data,error,loading}) => {
             renderItem={({item}) => (
               <PopularJobCard
                 item={item}
+                handleCardPress={handleCardPress}
+                selectedJob={selectedJob}
               >
               </PopularJobCard>
             )}
