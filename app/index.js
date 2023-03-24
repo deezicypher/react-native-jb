@@ -3,11 +3,13 @@ import { View, Text, ScrollView, SafeAreaView } from "react-native";
 import { Stack, useRouter } from "expo-router";
 import { COLORS,icons, images, SIZES } from "../constants";
 import { Nearbyjobs,Popularjobs, ScreenHeaderBtn, Welcome  } from "../components";
+import useFetch from "../hooks/useFetch";
 
 
 const Home = () => {
     
-    const router = useRouter();
+    const router = useRouter(); 
+    const {data, loading, error, refetch } = useFetch('search', {query: 'Python Developer', num_pages: 1});
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: COLORS.lightWhite}}>
@@ -27,8 +29,8 @@ const Home = () => {
         <ScrollView  showsVerticalScrollIndicator={false}>
             <View style={{flex:1, padding: SIZES.medium}} >
                 <Welcome />
-                <Popularjobs />
-                <Nearbyjobs />
+                <Popularjobs data={data} error={error} loading={loading} />
+                <Nearbyjobs data={data} error={error} loading={loading} />
             </View>
         </ScrollView>
     </SafeAreaView>

@@ -12,6 +12,7 @@ const useFetch = (endpoint, query) => {
 
     const [error, setError] = useState(null);
 
+
     const options = {
         method: 'GET',
         url: `https://jsearch.p.rapidapi.com/${endpoint}`,
