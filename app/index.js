@@ -9,6 +9,7 @@ import useFetch from "../hooks/useFetch";
 const Home = () => {
     
     const router = useRouter(); 
+    const [search, setSearch] = useState("");
     const {data, loading, error, refetch } = useFetch('search', {query: 'Python Developer', num_pages: 1});
 
   return (
@@ -28,7 +29,13 @@ const Home = () => {
         />
         <ScrollView  showsVerticalScrollIndicator={false}>
             <View style={{flex:1, padding: SIZES.medium}} >
-                <Welcome />
+                <Welcome  searchTerm={search} setSearchTerm={setSearch} 
+                 handleClick={
+                    () => {if(search){
+                            router.push(`/search/${search}`)
+                    }
+                }
+                    } />
                 <Popularjobs data={data} error={error} loading={loading} />
                 <Nearbyjobs data={data} error={error} loading={loading} />
             </View>
